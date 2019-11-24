@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 
 namespace BFS_c_sharp.Model
 {
     public class UserNode
     {
-        public int Id { get; set; }
+        //it was a property earlyer in the code
+        static int nextId;
+        public int Id { get; private set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         private readonly HashSet<UserNode> _friends = new HashSet<UserNode>();
@@ -14,13 +17,13 @@ namespace BFS_c_sharp.Model
             get { return _friends; }
         }
 
-
-        public UserNode() { }
+        public UserNode() {}
 
         public UserNode(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
+            Id = Interlocked.Increment(ref nextId);
         }
 
         public void AddFriend(UserNode friend)
@@ -31,7 +34,12 @@ namespace BFS_c_sharp.Model
 
         public override string ToString()
         {
-            return FirstName + " " + LastName + "(" + Friends.Count + ")";
+            // Check The Friends Name
+            foreach (var friend in Friends) {
+            
+            System.Console.WriteLine("Friends ID: {0} Friends Firstname: {1} Friends Lastname: {2} ", friend.Id, friend.FirstName, friend.LastName );
+            }
+            return Id + " " + FirstName + " " + LastName + "(" + Friends.Count + ")";
         }
     }
 }
