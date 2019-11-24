@@ -67,10 +67,23 @@ namespace BFS_c_sharp
                     Console.WriteLine("path in DISTANCE 3 {0,2}: {1}",
                                 vertex, string.Join(", ", shortestPath(vertex)));
                 }
-            Console.WriteLine("all shortest path to {0,2}: {1}",
-                    vertex, string.Join(", ", shortestPath(vertex)));
+                Console.WriteLine("all shortest path to {0,2}: {1}",
+                        vertex, string.Join(", ", shortestPath(vertex)));
+            }
+            Console.ReadLine();
+
+            //FRIEND CHAIN---------------------------------------------------------------------------------------
+            if (shortestPath(myVertices[endVertex]).Count() == distance)
+            {
+                Console.WriteLine("{0} {1}'s Friends in Distance 3: " + "\n",
+                    users[myVertices[endVertex]].FirstName, users[myVertices[endVertex]].LastName);
+
+                foreach (var ver in shortestPath(myVertices[endVertex]))
+                {
+                    Console.WriteLine("{0} {1}", users[ver].FirstName, users[ver].LastName);
+                }
             }
         }
-
     }
 }
+
